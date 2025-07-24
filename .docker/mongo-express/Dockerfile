@@ -1,0 +1,1 @@
+FROM mongo-express:1.0.2-18@sha256:1b23d7976f0210dbec74045c209e52fbb26d29b2e873d6c6fa3d3f0ae32c2a64
