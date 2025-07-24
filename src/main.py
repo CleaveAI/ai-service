@@ -1,11 +1,11 @@
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.api.routes.v1.router import api_router as v1_api_router
-from src.api.utils.exception_handlers import register_exception_handlers
 from src.config import settings
 from src.logger import logger, setup_logging
+from src.modules.auth.router import router as auth_router
+from src.utils.exception_handlers import register_exception_handlers
 from src.utils.response import Response, Status
 
 load_dotenv(override=True)
@@ -21,7 +21,7 @@ def create_app() -> FastAPI:
             },
         ],
         summary="AI Service API",
-        description="AI Service API",
+        description="AI Service API with modular architecture for agents, evaluation, and workers",
         version="0.1.0",
     )
 
@@ -35,7 +35,10 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
-    app.include_router(v1_api_router, prefix="/ai-service/v1")
+    v1_api_router = APIRouter(prefix="/ai/v1")
+    v1_api_router.include_router(auth_router, prefix="/auth", tags=["Authentication"])
+
+    app.include_router(v1_api_router)
     register_exception_handlers(app)
 
     return app

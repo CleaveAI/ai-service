@@ -40,8 +40,8 @@ celery -A src.workers.main.celery_app flower --port=8300
 
 Once you run everything locally, you can access the following services:
 
-| Service         | URL                   |
-| --------------- | --------------------- |
-| Redis Insight   | http://localhost:8100 |
-| MongoDB Compass | http://localhost:8200 |
-| Celery Flower   | http://localhost:8300 |
+| Service         | URL                     |
+| --------------- | ----------------------- |
+| Redis Insight   | <http://localhost:8100> |
+| MongoDB Compass | <http://localhost:8200> |
+| Celery Flower   | <http://localhost:8300> |

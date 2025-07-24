@@ -17,6 +17,13 @@ class Settings(BaseSettings):
     # ========== MONGODB ========
     MONGODB_URL: str
 
+    # ========== WORKOS ==========
+    WORKOS_API_KEY: str
+    WORKOS_CLIENT_ID: str
+    WORKOS_JWKS_URL: str
+    WORKOS_TESTUSER_EMAIL: str
+    WORKOS_TESTUSER_PASSWORD: str
+
     class Config:
         env_file = ".env"
 

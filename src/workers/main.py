@@ -1,25 +1,7 @@
-import asyncio
-
 from celery import Celery
-from celery.signals import worker_process_init, worker_process_shutdown
 
 from src.config import settings
-from src.database.mongodb import mongodb_client
 from src.logger import logger, setup_logging
-
-
-@worker_process_init.connect
-def setup_database(**kwargs):
-    logger.info("Initializing database connection for worker...")
-    asyncio.run(mongodb_client.init_db())
-    logger.info("Database connection for worker initialized.")
-
-
-@worker_process_shutdown.connect
-def teardown_database(**kwargs):
-    logger.info("Closing database connection for worker...")
-    asyncio.run(mongodb_client.close_db())
-    logger.info("Database connection for worker closed.")
 
 
 def create_celery_app():
